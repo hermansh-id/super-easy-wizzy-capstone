@@ -6,6 +6,7 @@ from langfuse.langchain import CallbackHandler
 
 langfuse_handler = CallbackHandler()
 
+# function untuk mengirim chat
 def send_chat(question: str, history: str) -> dict:
     result = agent.invoke(
         {"messages": history + [{"role": "user", "content": question}]},
@@ -21,7 +22,6 @@ def send_chat(question: str, history: str) -> dict:
             total_input_tokens += message.response_metadata["usage_metadata"]["input_tokens"]
             total_output_tokens += message.response_metadata["usage_metadata"]["output_tokens"]
         elif "token_usage" in message.response_metadata:
-            # Fallback for older or different structures
             total_input_tokens += message.response_metadata["token_usage"].get("prompt_tokens", 0)
             total_output_tokens += message.response_metadata["token_usage"].get("completion_tokens", 0)
 
@@ -44,7 +44,7 @@ def send_chat(question: str, history: str) -> dict:
 
 st.title("Chatbot HR ")
 
-# Initialize chat history
+# Initialize chat history messsage
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
