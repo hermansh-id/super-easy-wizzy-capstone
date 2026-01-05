@@ -44,7 +44,6 @@ def send_chat(question: str, history: str) -> dict:
 
 st.title("Chatbot HR ")
 
-# Initialize chat history messsage
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
